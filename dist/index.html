@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff2e1"><title>小P · 云栖乐园</title>
+<link rel="icon" href="assets/portrait.png"><link rel="stylesheet" href="park.css?v=40c84fe19296">
+</head>
+<body data-game="xiaop-cloudhaven">
+<svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 6l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+<symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.2 3 4 3 4-3 4-3M8 9h.01M16 9h.01"/></symbol>
+<symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="m13 3 2.1 6.9L22 12l-6.9 2.1L13 21l-2.1-6.9L4 12l6.9-2.1L13 3ZM4 2v4M2 4h4"/></symbol>
+<symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/></symbol>
+<symbol id="icon-food" viewBox="0 0 24 24"><path d="M3 11h18l-1.5 8h-15L3 11Z"/><path d="M6 11V8a3 3 0 0 1 6 0v3m0 0V7a3 3 0 0 1 6 0v4M8 15h8"/></symbol>
+<symbol id="icon-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+</defs></svg>
+
+<main class="park-main" id="parkStage">
+<div class="park-layout">
+<section class="scene-column" aria-label="圆形宠物乐园">
+<div class="scene-frame"><div class="header-tools" id="screenTools"><select id="sceneSelect" class="text-button" aria-label="切换场景"><option value="forest">森林树屋</option><option value="snow">冰雪营地</option><option value="desert">沙漠遗迹</option><option value="lava">熔岩山谷</option></select><button id="helpBtn" class="text-button" aria-label="打开玩法说明">?</button></div><div id="dialogShade" class="dialog-shade" hidden></div><dialog aria-modal="true" id="petCard" class="pet-card" aria-labelledby="petCardName">
+<header class="pet-card-title"><h2 id="petCardName"></h2><button id="closePetCard" class="card-close" aria-label="关闭宠物卡片" autofocus>×</button></header>
+<div class="pet-card-content">
+<section class="pet-card-expression" aria-label="这位伙伴的四种表情">
+<div class="pet-card-preview"><div id="parkExpression" class="expression-sprite" role="img" aria-label="伙伴表情"></div><span id="expressionName">开心</span></div>
+<h3 id="expressionPet"></h3><div id="emoteButtons" class="emote-buttons"></div>
+</section>
+<aside class="care-panel" aria-label="与选中的伙伴互动">
+<section class="care-stats" aria-label="伙伴状态">
+<div class="care-growth"><span class="care-bond"><svg class="icon"><use href="#icon-heart"/></svg><span id="careRelationship">初识的小伙伴</span></span><b id="careLevel">Lv.1</b></div>
+<div class="care-xp-track"><i id="careXpBar"></i></div><p class="care-xp" id="careXpText">成长 0 / 40</p>
+<div class="care-needs">
+<div class="need-cell"><span class="need-icon"><svg class="icon"><use href="#icon-food"/></svg></span><span class="need-label" id="needFoodLabel">饱食</span><b id="needFoodValue">70</b><div class="need-track" id="needFood" role="progressbar" aria-label="饱食" aria-valuemin="1" aria-valuemax="100"><i id="needFoodBar"></i></div></div>
+<div class="need-cell"><span class="need-icon"><svg class="icon"><use href="#icon-smile"/></svg></span><span class="need-label">心情</span><b id="needMoodValue">70</b><div class="need-track" id="needMood" role="progressbar" aria-label="心情" aria-valuemin="1" aria-valuemax="100"><i id="needMoodBar"></i></div></div>
+<div class="need-cell"><span class="need-icon"><svg class="icon"><use href="#icon-sparkle"/></svg></span><span class="need-label">清洁</span><b id="needCleanValue">70</b><div class="need-track" id="needClean" role="progressbar" aria-label="清洁" aria-valuemin="1" aria-valuemax="100"><i id="needCleanBar"></i></div></div>
+<div class="need-cell"><span class="need-icon"><svg class="icon"><use href="#icon-bolt"/></svg></span><span class="need-label">体力</span><b id="needEnergyValue">70</b><div class="need-track" id="needEnergy" role="progressbar" aria-label="体力" aria-valuemin="1" aria-valuemax="100"><i id="needEnergyBar"></i></div></div>
+</div>
+</section>
+<div class="care-actions">
+<button id="care-feed"><span class="action-art art-feed" aria-hidden="true"></span><b id="careFeedLabel">喂小饼</b><svg class="action-next icon" aria-hidden="true"><use href="#icon-next"/></svg></button>
+<button id="care-pet"><span class="action-art art-pet" aria-hidden="true"></span><b>摸摸头</b><svg class="action-next icon" aria-hidden="true"><use href="#icon-next"/></svg></button>
+<button id="care-dance"><span class="action-art art-dance" aria-hidden="true"></span><b id="careDanceLabel">一起跳舞</b><svg class="action-next icon" aria-hidden="true"><use href="#icon-next"/></svg></button>
+<button id="care-bath"><span class="action-art art-bath" aria-hidden="true"></span><b>泡泡澡</b><svg class="action-next icon" aria-hidden="true"><use href="#icon-next"/></svg></button>
+</div>
+<button id="openDuel" class="text-button duel-entry">伙伴对战</button><p id="battleRequirement" class="battle-requirement" hidden>四项都低于 30 时不能战斗，至少一项达到 30 即可。</p><p id="careActivity" class="care-activity" role="status" aria-live="polite" hidden></p><div id="careProgress" class="care-progress" hidden><i id="careProgressBar"></i></div>
+</aside>
+</div>
+</dialog>
+<dialog aria-modal="true" id="mapPicker" aria-labelledby="mapPickerTitle"><div class="help-title"><h2 id="mapPickerTitle">选择场景</h2><button id="closeMapPicker" aria-label="关闭场景选择">×</button></div><div class="map-choices"><button id="mapForest" class="map-choice"><img src="assets/maps/forest.png?v=35" alt=""><span>森林树屋</span></button><button id="mapSnow" class="map-choice"><img src="assets/maps/snow.png?v=35" alt=""><span>冰雪营地</span></button><button id="mapDesert" class="map-choice"><img src="assets/maps/desert.png?v=35" alt=""><span>沙漠遗迹</span></button><button id="mapLava" class="map-choice"><img src="assets/maps/lava.png?v=35" alt=""><span>熔岩山谷</span></button></div></dialog>
+<dialog aria-modal="true" id="duelPicker" aria-labelledby="duelTitle"><div class="help-title"><h2 id="duelTitle">选择对手</h2><button id="closeDuelPicker" aria-label="关闭对手选择">×</button></div><p id="duelRule" class="duel-rule">双方各自每张地图有两只不同的小怪，至少一项属性达到 30 即可进入竞技场，两位伙伴轮流出招。</p><div class="duel-opponents"><button id="duelPet0" class="duel-pet"></button><button id="duelPet1" class="duel-pet"></button><button id="duelPet2" class="duel-pet"></button><button id="duelPet3" class="duel-pet"></button><button id="duelPet4" class="duel-pet"></button><button id="duelPet5" class="duel-pet"></button></div></dialog>
+<dialog aria-modal="true" id="parkHelp"><div class="help-title"><h2>和伙伴一起玩</h2><button id="closeHelp" aria-label="关闭玩法说明">×</button></div><div class="help-content"><p>在营地点击宠物，再点击战斗选择探索地图。地图下方有背包和返回营地两个按钮，背包打开这只宠物的养成与表情面板，照料也在地图中完成。点击铺装地面移动；点击宠物或小怪时，每张地图有两只不同的小怪，至少一项属性达到 30 即可进入竞技场；只有四项全低于 30 才提示暂不能战斗。战后返回原地图继续探索。背包中的伙伴对战也使用竞技场。</p><p>选择喂食、摸头或泡泡澡，伙伴会用动作和表情回应你。选择一起跳舞，伙伴会自动跳一段舞。轻点它或按空格、Enter，可以切换舞步回应。</p><p>对战只有一种光波：点击底部移动的滑轮即可锁定并发射，停在中央绿色区域造成正常伤害，其他区域伤害减半。倒计时为 60 秒，时间到按剩余血量比例判定，平局不奖励经验。</p><p>日常喂食、摸头、跳舞、洗澡恢复属性，不增加经验。只有四项属性都低于 30 才不能出战，打怪胜利后获得经验；双宠对战时经验发给获胜伙伴，退出或失败不获得经验。四种表情都在这位伙伴的卡片中选择。</p><p>伙伴最高 10 级。四项状态自然变化很慢，没有互动时约一天从 100 降到 1，待机也会继续计时。</p><p>滚轮缩放地图，拖动平移，Esc 关闭宠物卡片；回到地图后可结束舞蹈并复位视角。位置与成长会自动保存。</p></div></dialog>
+<section id="battlePanel" class="battle-panel" aria-label="圆屏光波对战" hidden>
+<button id="battleWave" class="battle-lock" aria-label="点击滑轮，锁定位置并发射光波"><span class="sr-only">锁定并发射光波</span></button>
+<p id="battleResult" class="sr-only" role="status" aria-live="polite"></p>
+<button id="leaveBattle" class="battle-return">返回地图</button>
+</section><canvas id="parkCanvas" width="1280" height="1280" tabindex="0" aria-label="点击场内宠物，显示背包与战斗按钮。滚轮缩放，拖动平移。"></canvas><nav id="petActions" class="pet-actions" aria-label="选中宠物的操作" hidden>
+<button id="openBackpack" aria-label="背包：打开选中宠物的面板" title="背包"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 10V7a6 6 0 0 1 12 0v3M6 12c0-2 2-3 4-3h12c2 0 4 1 4 3l2 15H4l2-15Z"/><path d="M9 19h14v8H9zM13 12h6"/></svg><span class="nav-label">背包</span></button>
+<button id="enterBattle" aria-label="战斗：在当前场景挑战小怪" title="战斗"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m6 3 4 1 14 18-3 3L4 7 6 3Zm20 0-4 1L8 22l3 3L28 7l-2-4ZM5 21l6 6m-7 1 4-4m19-3-6 6m7 1-4-4"/></svg><span class="nav-label">战斗</span></button>
+<button id="returnCamp" aria-label="返回营地" title="返回营地" hidden><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m3 27 13-22 13 22H3ZM10 27l6-12 6 12M12 7l7-4"/></svg><span class="nav-label">返回营地</span></button></nav><div id="encounterNotice" class="encounter-notice" role="status" aria-live="polite" hidden></div><div class="scene-loading" id="sceneLoading" role="status" aria-label="正在进入乐园"><span class="loading-mark" aria-hidden="true"></span></div></div>
+</section>
+
+</div>
+<div class="sr-only"><span id="selectedNumber"></span><span id="selectedDescription"></span><span id="selectedPersonality"></span><span id="interactionCount"></span><span id="expressionSource"></span><span id="saveStatus"></span></div>
+</main>
+<script src="catalog.js?v=90841544ff82"></script><script src="assets/maps/road-navigation.js?v=26fe5d338166"></script><script src="park-map.js?v=6ed469c27658"></script><script src="park-worlds.js?v=a82717247c54"></script><script src="assets/locomotion/manifest.js?v=e788a3b987da"></script><script src="assets/expressions/manifest.js?v=29c299823a91"></script><script src="park-expressions.js?v=e9e71b84402f"></script><script src="park-motion.js?v=7637cda675ba"></script><script src="park-engine.js?v=fd1f226bd33b"></script><script src="park-care.js?v=8bee721193cd"></script><script src="park-combat.js?v=78ead2b1aafc"></script><script src="park-adventure.js?v=2dd6864bfc78"></script><script src="assets/monsters/manifest.js?v=906f4d979720"></script><script src="assets/rhythm/manifest.js?v=2cfbafd51ce6"></script><script src="park-dance.js?v=8a0d239bcc41"></script><script src="assets/care/props.js?v=881f13300750"></script><script src="park-care-gestures.js?v=40bd430f7ff4"></script><script src="park-care-art.js?v=c06b8b061ac0"></script><script src="park-scene.js?v=3defbb2eeb2b"></script><script src="park-battle-scene.js?v=f38d882c31d3"></script><script src="park.js?v=ad322b109f23"></script>
+</body></html>
