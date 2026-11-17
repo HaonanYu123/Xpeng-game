@@ -1,6 +1,6 @@
-# XiaoP Cloudhaven
+# 小P · 云栖乐园
 
-A browser pet game with six companions, care interactions, four exploration maps and arena battles.
+和小P一起养萌宠、探索秘境、轻松对战，收获每天的小小快乐。
 
 Play now: https://haonanyu123.github.io/Xpeng-game/
 
