@@ -2,6 +2,8 @@
 
 A browser pet game with six companions, care interactions, four exploration maps and arena battles.
 
+Play now: https://haonanyu123.github.io/Xpeng-game/
+
 ## Play and save
 
 - Play through the repository's GitHub Pages URL.
