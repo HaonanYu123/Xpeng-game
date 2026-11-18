@@ -310,4 +310,3 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
  .scene-frame .pet-card-expression .emote-buttons{width:auto;grid-template-columns:repeat(2,minmax(0,1fr));}
  .scene-frame .pet-card-expression .emote-thumbnail{transform:scale(.48);margin:-23px;}
 }
-
