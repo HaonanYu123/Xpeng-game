@@ -1,4 +1,3 @@
-/* Shared styles for the current circular game screen. */
 :root{color-scheme:light;--ink:#634025;--muted:#aa8966;--gold:#c38b43;--line:#fffaf1;--paper:#fff5e7;}
 *{box-sizing:border-box;}
 body{margin:0;min-height:100svh;color:var(--ink);font:15px/1.5 "Microsoft YaHei","PingFang SC",sans-serif;background:radial-gradient(ellipse at 16% 17%,#fffdf6ee,transparent 40%),radial-gradient(ellipse at 90% 8%,#f7dac5b3,transparent 35%),radial-gradient(ellipse at 70% 94%,#f8dca8b3,transparent 52%),linear-gradient(130deg,#f6e4d8,#fff4e6 46%,#f4dbc1);isolation:isolate;}
@@ -17,10 +16,6 @@ a{color:inherit;text-decoration:none;}
 .icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
 .text-button{border:1px solid #fffaf0;background:#fff7eb77;box-shadow:inset 0 1px #fff,0 5px 12px #ae764316;border-radius:30px;padding:8px 21px;font-size:12px;color:#966b45;}
 .care-panel{position:relative;padding:clamp(24px,2.8vw,48px);border:1.5px solid #fffbf4;border-radius:38px;background:radial-gradient(ellipse at 15% 5%,#fffdf7b3,transparent 60%),linear-gradient(130deg,#fff6e9c2,#fce7d8ad);box-shadow:inset 0 1px 1px #fff,0 18px 55px #ad805425;backdrop-filter:blur(18px);}
-.care-growth{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:19px;}
-.care-bond{display:flex;align-items:center;gap:10px;font-size:clamp(12px,1vw,16px);white-space:nowrap;}
-.care-bond .icon{fill:#eea075;stroke:#ffd4ac;filter:drop-shadow(0 3px 3px #c7834c30);}
-.care-growth>b{font:italic 32px Georgia;color:#ad7131;white-space:nowrap;}
 .care-xp-track,.need-track,.care-progress{height:10px;background:linear-gradient(180deg,#e7d7bc,#eee3cf);border-radius:20px;overflow:hidden;box-shadow:0 1px 1px #fffbf5;}
 .care-xp-track{height:14px;}
 .care-xp-track>i,.need-track>i,.care-progress>i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#fac05e,#c78b3a);box-shadow:inset 0 1px 2px #ffedb6;transition:width .3s;}
@@ -56,11 +51,9 @@ a{color:inherit;text-decoration:none;}
 @keyframes park-loading{to{transform:rotate(360deg)}}
 dialog{width:min(460px,90vw);padding:29px;border:1.5px solid #fff9ed;border-radius:28px;background:linear-gradient(135deg,#fff8ed,#f9e5cc);color:var(--ink);box-shadow:0 25px 80px #89623844;}
 dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
-.help-title{display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.help-title h2{font-size:21px;font-weight:500;margin:0;}
-.help-title button{border:0;background:none;font-size:27px;color:#aa8054;}
-.help-content{margin-top:22px;}
-.help-content p{font-size:13px;line-height:1.9;color:#9d7d59;}
+.dialog-title{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.dialog-title h2{font-size:21px;font-weight:500;margin:0;}
+.dialog-title button{border:0;background:none;font-size:27px;color:#aa8054;}
 @media(min-width:1800px){
 .care-actions{gap:16px;}
 .care-actions button{padding-right:22px;}
@@ -70,7 +63,6 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .care-panel{padding:25px;border-radius:30px;}
 .care-actions b{font-size:14px;}
 .care-actions button{padding-right:10px;gap:1px;}
-.care-bond{font-size:12px;}
 .care-actions{gap:10px;}
 .action-art{width:67px;}
 .care-needs{gap:18px;}
@@ -80,8 +72,6 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .care-stats{grid-column:1;align-self:center;}
 .care-actions{grid-column:2;grid-row:1/4;margin:0;gap:10px;}
 .care-actions button{min-height:84px;border-radius:21px;}
-.care-growth>b{font-size:26px;}
-.care-bond{font-size:12px;gap:7px;}
 .care-needs{gap:20px 17px;}
 .care-activity,.care-progress{grid-column:1;grid-row:auto;}
 .care-activity{margin:0;}
@@ -90,8 +80,6 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 @media(max-width:660px){
 .text-button{font-size:11px;padding:6px 15px;}
 .care-panel{display:block;padding:24px;margin-top:28px;border-radius:29px;}
-.care-growth>b{font-size:29px;}
-.care-bond{font-size:14px;}
 .care-xp{margin-bottom:23px;}
 .care-needs{gap:18px 28px;}
 .care-actions{margin-top:26px;gap:10px;}
@@ -145,9 +133,6 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .pet-card-expression .emote-thumbnail{transform:scale(.9);margin:-4px;}
 .pet-card-expression .emote-button[aria-pressed=true]{background:linear-gradient(125deg,#f9dcae,#ebbd7d);}
 #petCard .care-panel{display:block;margin:0;padding:0;min-width:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;}
-#petCard .care-growth{margin-bottom:15px;}
-#petCard .care-bond{font-size:14px;}
-#petCard .care-growth>b{font-size:30px;}
 #petCard .care-xp{margin-bottom:22px;}
 #petCard .care-needs{gap:20px 28px;}
 #petCard .care-actions{margin-top:24px;gap:11px;}
@@ -189,8 +174,6 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .pet-card-expression .emote-thumbnail{transform:scale(.6);margin:-17px;}
 .pet-card-expression h3{font-size:11px;}
 .pet-card-preview>span{font-size:11px;}
-#petCard .care-bond{font-size:12px;gap:6px;}
-#petCard .care-growth>b{font-size:26px;}
 #petCard .care-needs{gap:17px 15px;}
 #petCard .need-label{font-size:13px;}
 #petCard .care-actions .action-art{width:52px;}
@@ -209,17 +192,9 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .art-dance{background-image:url("assets/ui/rhythm-drum-v20.png");background-size:contain;background-position:center;}
 .scene-frame canvas.dance-active{cursor:pointer;}
 .header-tools{display:flex;align-items:center;gap:10px;}
-.header-tools select{max-width:135px;cursor:pointer;}
-.pet-actions{position:absolute;z-index:4;left:50%;bottom:13.5%;transform:translateX(-50%);display:flex;gap:18px;align-items:center;}
-.pet-actions button{width:62px;height:62px;display:grid;place-items:center;border:2px solid #fffbeb;border-radius:50%;background:linear-gradient(145deg,#fff6df,#f0d8ae);box-shadow:0 5px 0 #bd965f,0 8px 18px #503b3624,inset 0 1px #fff;color:#765334;}
-.pet-actions button:disabled{opacity:.68;filter:saturate(.45);}
-.pet-actions svg{width:31px;height:31px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .battle-panel{width:min(640px,100%);margin:20px auto 0;text-align:center;}
 .battle-requirement{color:#b27c5d;font-size:12px;margin:14px 0 0;}
 @media(max-width:660px){
-.pet-actions{gap:14px;}
-.pet-actions button{width:49px;height:49px;box-shadow:0 4px 0 #bd965f,0 6px 14px #503b3624;}
-.pet-actions svg{width:25px;height:25px;}
 .battle-panel{margin-top:18px;}
 .header-tools{gap:6px;}
 .header-tools .text-button{padding:6px 12px;}
@@ -234,22 +209,16 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .duel-opponents{grid-template-columns:repeat(2,minmax(0,1fr));}
 .duel-pet img{height:66px;width:58px;}
 }
-.pet-actions #enterBattle{background:linear-gradient(145deg,#f1ce8b,#c89953);color:#fff9e9;border-color:#fff5df;box-shadow:0 5px 0 #ac783d,0 8px 18px #68412828,inset 0 1px #ffe8bb;opacity:1;filter:none;}
 .map-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px;}
 .map-choice{padding:12px 8px;border:1px solid #fffbef;border-radius:23px;background:#fff6eaaa;display:flex;align-items:center;flex-direction:column;gap:10px;font-size:12px;}
 .map-choice img{width:128px;max-width:100%;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 4px 5px #b0845425);}
 .encounter-notice{position:absolute;z-index:5;left:50%;bottom:25%;transform:translateX(-50%);width:max-content;max-width:70%;padding:10px 17px;border:1px solid #fff9e8;border-radius:17px;background:#fff8e9f2;box-shadow:0 7px 20px #77553021;color:#986c45;text-align:center;font-size:12px;line-height:1.7;pointer-events:none;}
-.pet-actions #returnCamp{background:linear-gradient(145deg,#f4dfb6,#ddbc86);color:#795431;}
 @media(max-width:660px){
 .encounter-notice{max-width:75%;font-size:10px;padding:7px 12px;}
 }
-.pet-actions button{position:relative;}
-.nav-label{position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%);font-size:11px;white-space:nowrap;color:#795b3c;text-shadow:0 1px 3px #fff7e6;pointer-events:none;}
 .park-main{padding:12px;min-height:100svh;max-width:none;}
 .scene-frame{width:min(calc(100vw - 24px),calc(100svh - 24px),1040px);container-type:inline-size;}
 .header-tools{position:absolute;z-index:4;left:50%;top:9%;transform:translateX(-50%);gap:12px;}
-.header-tools select{max-width:145px;background:#fff2dbe8;font-size:clamp(11px,1.65cqi,16px);padding:6px 12px;}
-#helpBtn{width:32px;height:32px;padding:0;border-radius:50%;font-size:17px;background:#fff2dbd9;}
 .dialog-shade{position:absolute;inset:0;z-index:7;background:#493a3059;backdrop-filter:blur(5px);}
 .scene-frame dialog,.scene-frame #petCard{position:absolute;z-index:8;left:15%;top:15%;width:70%;height:70%;max-width:none;max-height:none;min-width:0;margin:0;padding:clamp(12px,2.8cqi,28px);overflow:auto;overscroll-behavior:contain;border-radius:clamp(18px,3cqi,30px);box-shadow:0 8px 35px #573e3333;font-size:clamp(11px,1.65cqi,16px)
 ;}
@@ -266,9 +235,6 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .scene-frame .pet-card-expression .emote-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;width:68%;}
 .scene-frame .pet-card-expression .emote-thumbnail{transform:scale(.7);margin:-13px;}
 .scene-frame .emote-button{padding:0 0 3px!important;font-size:11px!important;}
-.scene-frame #petCard .care-growth{margin:0 0 10px;}
-.scene-frame #petCard .care-growth>b{font-size:clamp(20px,3cqi,30px);}
-.scene-frame #petCard .care-bond{font-size:clamp(11px,1.8cqi,15px);gap:5px;white-space:normal;}
 .scene-frame #petCard .care-xp{margin:5px 0 14px;font-size:clamp(11px,1.6cqi,14px);}
 .scene-frame #petCard .care-needs{gap:14px 18px;}
 .scene-frame .need-cell{grid-template-columns:25px 1fr auto;gap:4px 6px;}
@@ -281,9 +247,7 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .scene-frame #petCard .care-actions .action-art{width:clamp(32px,7cqi,76px);}
 .scene-frame #petCard .care-actions b{font-size:clamp(11px,1.9cqi,17px);}
 .scene-frame .duel-entry{font-size:clamp(11px,1.6cqi,14px);padding:6px 13px;}
-.scene-frame .help-title h2{font-size:clamp(14px,2.5cqi,22px);}
-.scene-frame .help-content{margin-top:15px;}
-.scene-frame .help-content p,.scene-frame .duel-rule{font-size:clamp(11px,1.6cqi,14px);}
+.scene-frame .dialog-title h2{font-size:clamp(14px,2.5cqi,22px);}
 .scene-frame .map-choices{gap:10px;margin-top:12px;}
 .scene-frame .map-choice{padding:7px;font-size:clamp(11px,1.7cqi,14px);gap:4px;}
 .scene-frame .map-choice img{width:100%;max-width:190px;}
@@ -311,3 +275,39 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .scene-frame #petCard .care-actions button{min-height:46px;border-radius:13px;gap:0;}
 .scene-frame .action-next{width:10px;}
 }
+/* Scene identity is a label; game controls remain in the circle. */
+.header-tools{pointer-events:none;}
+.scene-tag{display:inline-flex;align-items:center;justify-content:center;padding:8px 20px;border:1px solid #fff4da;border-radius:999px;background:#fff1dceF;box-shadow:0 3px 12px #634b3526;color:#704c2c;font-size:clamp(12px,1.75cqi,17px);font-weight:600;line-height:1.3;white-space:nowrap;cursor:default;user-select:none;}
+/* Clip the shell; only the content scrolls, so every corner has the same shape. */
+.scene-frame #petCard{--card-radius:clamp(22px,3cqi,32px);padding:0;border:2px solid #fff3dc;border-radius:var(--card-radius);overflow:hidden;isolation:isolate;clip-path:inset(0 round var(--card-radius));background:linear-gradient(145deg,#fff9ef,#faecd9);}
+.scene-frame #petCard[open]{display:flex;flex-direction:column;}
+.scene-frame .pet-card-title{position:relative;flex:none;padding:clamp(12px,2cqi,20px) clamp(14px,2.5cqi,26px);border:0;border-bottom:1px solid #e9d8be;background:#fff3e2;backdrop-filter:none;}
+.pet-card-tools{display:flex;align-items:center;gap:clamp(8px,1.4cqi,14px);flex-shrink:0;}
+#careLevel{font:italic 600 clamp(17px,2.4cqi,23px)/1.2 Georgia;color:#a46728;background:#f5dfb9;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+.scene-frame .card-close{border:1px solid #e1c398;background:#fffcf5;color:#8b6033;box-shadow:none;}
+.scene-frame .pet-card-content{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable;padding:clamp(12px,2.2cqi,24px);scrollbar-width:thin;scrollbar-color:#cbb08a transparent;}
+.pet-card-content::-webkit-scrollbar{width:7px;}
+.pet-card-content::-webkit-scrollbar-track{background:transparent;margin:12px 0;}
+.pet-card-content::-webkit-scrollbar-thumb{border:2px solid #faecd9;border-radius:8px;background:#cbb08a;}
+.scene-frame .pet-card-expression{display:grid;grid-template-columns:minmax(96px,.8fr) minmax(0,2fr);align-items:center;gap:clamp(8px,1.6cqi,16px);padding:clamp(8px,1.4cqi,16px);border-radius:20px;margin:0 0 18px;}
+.scene-frame .pet-card-preview{width:auto;min-width:0;height:clamp(112px,15cqi,144px);gap:3px;}
+.scene-frame .pet-card-expression .emote-buttons{width:auto;min-width:0;grid-template-columns:repeat(4,minmax(0,1fr));}
+.scene-frame #petCard .care-xp-track{margin-top:3px;}
+.scene-frame #petCard .care-xp{margin:6px 0 18px;}
+.pet-actions{position:absolute;z-index:4;left:50%;bottom:12%;transform:translateX(-50%);display:flex;gap:clamp(16px,2.6cqi,28px);align-items:center;}
+.scene-frame .pet-actions button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:clamp(62px,9cqi,86px);height:clamp(62px,9cqi,86px);padding:8px;border:3px solid #fff4da;border-radius:50%;background:linear-gradient(145deg,#397a64,#174d40);box-shadow:0 5px 0 #113d33,0 9px 19px #30291550,inset 0 2px #ffffff40;color:#fff9e9;}
+.scene-frame .pet-actions #enterBattle{background:linear-gradient(145deg,#eba843,#af5c23);box-shadow:0 5px 0 #81431d,0 9px 19px #30291550,inset 0 2px #ffffff55;color:#fff9e9;opacity:1;filter:none;}
+.scene-frame .pet-actions #returnCamp{background:linear-gradient(145deg,#50798a,#2d4e66);box-shadow:0 5px 0 #1e3b4b,0 9px 19px #30291550,inset 0 2px #ffffff40;}
+.scene-frame .pet-actions button:disabled{opacity:.6;filter:saturate(.4);}
+.scene-frame .pet-actions button:hover:not(:disabled){transform:translateY(-3px);filter:brightness(1.08);}
+.scene-frame .pet-actions button:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 #514329,0 3px 8px #30291540;}
+.scene-frame .pet-actions svg{width:clamp(26px,3.9cqi,36px);height:clamp(26px,3.9cqi,36px);fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px #28351a50);}
+.scene-frame .nav-label{position:static;transform:none;font-size:clamp(11px,1.45cqi,14px);font-weight:600;line-height:1.1;white-space:nowrap;color:inherit;text-shadow:0 1px 2px #16382770;pointer-events:none;}
+@container(max-width:600px){
+ .scene-frame .pet-card-expression{grid-template-columns:72px minmax(0,1fr);border-radius:16px;gap:8px;}
+ .scene-frame .pet-card-preview{width:auto;height:104px;}
+ .scene-frame .pet-card-preview .expression-sprite{transform:scale(.56);margin:-28px;}
+ .scene-frame .pet-card-expression .emote-buttons{width:auto;grid-template-columns:repeat(2,minmax(0,1fr));}
+ .scene-frame .pet-card-expression .emote-thumbnail{transform:scale(.48);margin:-23px;}
+}
+

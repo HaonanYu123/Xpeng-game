@@ -13,7 +13,7 @@ if(initialCare.needsRefillRevision!==saved?.care?.needsRefillRevision){
  try{localStorage.setItem(STORE,JSON.stringify(toppedUp));saved=toppedUp;}catch(e){storageOK=false;}
 }
 const petCard=$('petCard'),duelPicker=$('duelPicker'),mapPicker=$('mapPicker');
-const helpDialog=$('parkHelp'),dialogs=[petCard,duelPicker,mapPicker,helpDialog],openDialog=()=>dialogs.find(d=>d.open);
+const dialogs=[petCard,duelPicker,mapPicker],openDialog=()=>dialogs.find(d=>d.open);
 let duelOrigin=null,mapOrigin=null,adventure=null,homeState=null;
 const combat=window.ParkCombat.create({care});let battlePainter,selectedActions=false,currentScene=window.ParkWorlds.scenes.find(s=>s.id===saved?.sceneId)||window.ParkWorlds.scenes[0];
 const scenePositions=saved?.scenePositions||{};let lastBattlePhase=null,battleReturnAt=null,encounterNotice=null;
@@ -26,7 +26,6 @@ $('emoteButtons').innerHTML=Object.entries(emotes).map(([id,e])=>`<button class=
 function save(){try{const base=adventure?homeState:engine.serialize();localStorage.setItem(STORE,JSON.stringify({...base,expressions:engine.serialize().expressions,sceneId:currentScene.id,scenePositions,care:care.serialize()}));storageOK=true;$('saveStatus').textContent='陪伴与位置已保存';}catch(e){storageOK=false;$('saveStatus').textContent='当前浏览器暂不能保存位置';}}
 function renderCare(snapshot,careState){
  const pet=careState.pets[snapshot.selected],profile=pet.profile,job=pet.job;
- $('careRelationship').textContent=pet.relationship+' · 亲密 '+Math.round(pet.bond);
  $('careLevel').textContent='Lv.'+pet.growth.level;
  $('careXpBar').style.width=pet.growth.current/pet.growth.next*100+'%';
  $('careXpText').textContent=pet.growth.maxed?'已满级 · Lv.10':'成长 '+pet.growth.current+' / '+pet.growth.next;
@@ -85,11 +84,11 @@ function renderControls(state=care.snapshot()){
  $('encounterNotice').textContent=encounterNotice?.text||'';
  $('enterBattle').disabled=false;
  $('enterBattle').title='战斗';
- $('enterBattle').setAttribute('aria-label',$('enterBattle').title);$('sceneSelect').disabled=Boolean(battle)||duelPicker.open||mapPicker.open||Boolean(p.job);$('sceneSelect').hidden=!adventure||Boolean(battle);
+ $('enterBattle').setAttribute('aria-label',$('enterBattle').title);$('sceneLabel').textContent=currentScene.name;
  canvas.setAttribute('aria-label',battle?'竞技场对战，点击底部滑轮锁定并发射光波，中央区域正常伤害，其他位置半伤':adventure?'探索地图：点击道路移动，点击宠物或小怪战斗，下方可打开背包或返回营地':'营地：点击宠物后，可打开背包或点击战斗选择探索地图');
  $('openDuel').disabled=!allowed.ok;renderDuelChoices();
  const modal=Boolean(openDialog());canvas.inert=modal;
- $('dialogShade').hidden=!modal;$('screenTools').hidden=Boolean(battle)||modal;
+ $('dialogShade').hidden=!modal;$('screenTools').hidden=!adventure||Boolean(battle)||modal;
  $('battlePanel').hidden=!battle;if(!battle)return;
  const ended=window.ParkCombat.ended(battle.phase);
  $('battleWave').hidden=ended;$('battleWave').disabled=battle.phase!=='player';
@@ -146,14 +145,13 @@ function enterAdventure(id,theme){
  window.ParkWorlds.use(currentScene.id,Boolean(images['scene-'+currentScene.id]?.naturalWidth));
  engine=window.ParkEngine.create({saved:{...homeState,expressions:engine.serialize().expressions,selected:id,mapId:window.ParkMap.world.id,positions:[]},soloId:id});engine.setSpeed(1.5);
  adventure=window.ParkAdventure.create({engine,care,combat,id,theme:currentScene.id});painter=window.ParkScene.create(canvas,images);
- selectedActions=false;destination=null;hover=-1;drag=null;resetView();$('sceneSelect').value=currentScene.id;updateUI();save();canvas.focus({preventScroll:true});
+ selectedActions=false;destination=null;hover=-1;drag=null;resetView();updateUI();save();canvas.focus({preventScroll:true});
 }
 function restoreHome(persist=true){
  if(combat.snapshot())return;for(const p of care.snapshot().pets)care.cancel(engine,p.id);const state={...(homeState||engine.serialize()),expressions:engine.serialize().expressions};adventure=null;homeState=null;clearEncounterNotice();
  window.ParkWorlds.use(currentScene.id,false);engine=window.ParkEngine.create({saved:state});engine.setSpeed(1.5);
- painter=window.ParkScene.create(canvas,images);selectedActions=false;destination=null;hover=-1;drag=null;resetView();$('sceneSelect').value=currentScene.id;updateUI();if(persist)save();
+ painter=window.ParkScene.create(canvas,images);selectedActions=false;destination=null;hover=-1;drag=null;resetView();updateUI();if(persist)save();
 }
-$('sceneSelect').onchange=()=>{if(adventure&&!battleViewState())enterAdventure(adventure.snapshot().id,$('sceneSelect').value);};
 $('returnCamp').onclick=()=>{if(adventure&&!battleViewState())restoreHome();};
 function clearEncounterNotice(){encounterNotice=null;}
 function showEncounterNeeds(result){
@@ -218,10 +216,9 @@ canvas.addEventListener('pointerup',e=>{if(openDialog()||battleViewState())retur
 selectedActions=false;updateUI();
 if(engine.goTo(point.x,point.y)){care.cancel(engine,engine.snapshot().selected);destination={x:point.x,y:point.y,until:engine.snapshot().time+2.5};updateUI();}});
 const stopDrag=()=>{drag=null;canvas.classList.remove('dragging');};canvas.addEventListener('pointercancel',stopDrag);canvas.addEventListener('lostpointercapture',stopDrag);canvas.addEventListener('pointerleave',()=>{hover=-1;});canvas.addEventListener('wheel',e=>{e.preventDefault();if(openDialog()||activeDance()||battleViewState())return;setZoom(camera.zoom+(e.deltaY<0?.1:-.1));},{passive:false});
-document.addEventListener('keydown',e=>{if(e.key==='Tab'){const modal=openDialog();if(modal){const buttons=Array.from(modal.querySelectorAll('button,select,[tabindex]')).filter(b=>!b.hidden&&!b.disabled);if(buttons.length){const index=buttons.indexOf(document.activeElement),next=e.shiftKey?(index<=0?buttons.length-1:index-1):(index+1)%buttons.length;e.preventDefault();buttons[next].focus();}return;}}if(e.key==='Escape'){if(helpDialog.open){helpDialog.close();return;}if(mapPicker.open){e.preventDefault?.();mapPicker.close();return;}if(duelPicker.open){e.preventDefault?.();closeDuelPicker();return;}if(petCard.open){e.preventDefault?.();closePetCard();return;}if(battleViewState()){leaveBattle();return;}if(activeDance()){cancelDance();return;}if(adventure){restoreHome();return;}selectedActions=false;resetView();updateUI();}});
+document.addEventListener('keydown',e=>{if(e.key==='Tab'){const modal=openDialog();if(modal){const buttons=Array.from(modal.querySelectorAll('button,[tabindex]')).filter(b=>!b.hidden&&!b.disabled);if(buttons.length){const index=buttons.indexOf(document.activeElement),next=e.shiftKey?(index<=0?buttons.length-1:index-1):(index+1)%buttons.length;e.preventDefault();buttons[next].focus();}return;}}if(e.key==='Escape'){if(mapPicker.open){e.preventDefault?.();mapPicker.close();return;}if(duelPicker.open){e.preventDefault?.();closeDuelPicker();return;}if(petCard.open){e.preventDefault?.();closePetCard();return;}if(battleViewState()){leaveBattle();return;}if(activeDance()){cancelDance();return;}if(adventure){restoreHome();return;}selectedActions=false;resetView();updateUI();}});
 canvas.addEventListener('keydown',e=>{if(Boolean(openDialog()))return;if(battleViewState()&&(e.key===' '||e.key==='Enter')){e.preventDefault();if(combat.command('wave'))updateUI();return;}if(!e.repeat&&(e.key===' '||e.key==='Enter')&&activeDance()){e.preventDefault();const p=activeDance();care.tap(engine,p.id);updateUI();}});
 $('dialogShade').onclick=()=>{const open=openDialog();if(open)open.close();};
-$('helpBtn').onclick=()=>{if(battleViewState())return;cancelDance();helpDialog.show();renderControls();};$('closeHelp').onclick=()=>helpDialog.close();helpDialog.addEventListener('close',()=>{canvas.focus({preventScroll:true});renderControls();});helpDialog.addEventListener('click',e=>{if(e.target!==helpDialog)return;const r=helpDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)helpDialog.close();});
 window.addEventListener('beforeunload',save);document.addEventListener('visibilitychange',()=>{previous=0;save();});
 function frame(timestamp){const dt=previous?Math.min(.05,(timestamp-previous)/1000):.016;previous=timestamp;if(!battleViewState()){if(adventure)adventure.update(dt);else engine.update(dt);}combat.update(dt);const combatState=combat.snapshot();if(combatState?.phase!==lastBattlePhase){lastBattlePhase=combatState?.phase;updateUI();battleReturnAt=window.ParkCombat.ended(lastBattlePhase)?timestamp+BATTLE_RETURN_DELAY_MS:null;if(battleReturnAt!==null)save();}
  if(battleReturnAt!==null&&timestamp>=battleReturnAt)leaveBattle();

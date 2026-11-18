@@ -9,7 +9,7 @@
     { food: '能量电池', feed: '补充能量', fed: '面屏亮起青色小爱心，补给完成。' }
   ];
   const danceRules=Object.freeze({leadIn:.6,interval:.75,duration:10.8,finale:1.8,tapCooldown:.65});
-  const actions={feed:{duration:3.2,cooldown:10,xp:0,bond:0},pet:{duration:3,cooldown:12,xp:0,bond:2},bath:{duration:4.5,cooldown:15,xp:0,bond:2},dance:{duration:danceRules.duration,cooldown:12,xp:0,bond:2}};
+  const actions={feed:{duration:3.2,cooldown:10,xp:0},pet:{duration:3,cooldown:12,xp:0},bath:{duration:4.5,cooldown:15,xp:0},dance:{duration:danceRules.duration,cooldown:12,xp:0}};
   const rules=Object.freeze({minLevel:1,maxLevel:10,xpPerLevel:40,maxXp:360,needMin:1,needMax:100,battleMin:30,decaySeconds:24*60*60,decayPerSecond:99/(24*60*60)});
   const needKeys=['food','mood','clean','energy'];
   const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,v));
@@ -35,7 +35,7 @@
       const old=saved?.pets?.[id],needs={},defaults={food:64+id*3,mood:68-id*2,clean:72+id,energy:74-id*3},cooldowns={};
       for(const k of needKeys)needs[k]=refillNeeds?100:clampNeed(number(old?.needs?.[k],defaults[k],1,100)-offline*rules.decayPerSecond);
       for(const a of Object.keys(actions))cooldowns[a]=Math.max(0,number(old?.cooldowns?.[a],0,0,60)-offline);
-      return{id,needs,xp:Math.floor(number(old?.xp,0,0,360)),bond:number(old?.bond,12+id),cooldowns,job:null,battle:null,reaction:null,danceReaction:null};
+      return{id,needs,xp:Math.floor(number(old?.xp,0,0,360)),cooldowns,job:null,battle:null,reaction:null,danceReaction:null};
     });
     function syncTime(){const at=readTime();if(at<=lastNeedsAt)return;const elapsed=(at-lastNeedsAt)/1000;lastNeedsAt=at;clock+=elapsed;for(const p of pets){for(const k of needKeys)p.needs[k]=clampNeed(p.needs[k]-elapsed*rules.decayPerSecond);if(p.reaction&&clock>=p.reaction.until)p.reaction=null;if(p.danceReaction&&clock>=p.danceReaction.until)p.danceReaction=null;}}
     function available(id,action){
@@ -68,14 +68,14 @@
       return{ok:true,move:danceFor(p).move};
     }
     function finish(engine,p){
-      const j=p.job,c=actions[j.action],before=growth(p.xp).level;let xp=c.xp,bond=c.bond,text;
+      const j=p.job,c=actions[j.action],before=growth(p.xp).level;let xp=c.xp,text;
       if(j.action==='feed'){p.needs.food+=30;p.needs.energy+=10;text=profiles[p.id].fed;}
       if(j.action==='pet'){p.needs.mood+=10;p.needs.energy+=8;text='开心地蹭蹭你的手。';}
       if(j.action==='bath'){p.needs.clean+=40;p.needs.mood+=7;text='变得干干净净啦。';}
       if(j.action==='dance'){
         p.needs.mood+=16;p.needs.energy+=8;p.danceReaction={pose:'proud',until:clock+2.2};text='一起跳完了一段开心的舞。';
       }
-      for(const k of needKeys)p.needs[k]=clampNeed(p.needs[k]);p.xp=Math.min(360,p.xp+xp);p.bond=Math.min(100,p.bond+bond);p.cooldowns[j.action]=clock+c.cooldown;
+      for(const k of needKeys)p.needs[k]=clampNeed(p.needs[k]);p.xp=Math.min(360,p.xp+xp);p.cooldowns[j.action]=clock+c.cooldown;
       const leveled=growth(p.xp).level>before;p.reaction={text,until:clock+4};p.job=null;engine.resumeActor(p.id);
       return{id:p.id,action:j.action,message:text,leveled};
     }
@@ -89,7 +89,7 @@
         if(j.elapsed>=j.duration)events.push(finish(engine,p));
       }return events;
     }
-    function snapshot(){syncTime();return{clock,pets:pets.map(p=>({...p,needs:{...p.needs},profile:profiles[p.id],growth:growth(p.xp),relationship:p.bond>=80?'形影不离':p.bond>=50?'亲密伙伴':p.bond>=25?'熟悉的朋友':'初识的小伙伴',cooldowns:Object.fromEntries(Object.entries(p.cooldowns).map(([k,end])=>[k,Math.max(0,end-clock)])),job:p.job?{...p.job,target:p.job.target?{...p.job.target}:null,origin:{...p.job.origin},dance:p.job.dance?{...p.job.dance}:undefined}:null,reaction:p.reaction?{...p.reaction}:null,danceReaction:p.danceReaction?{...p.danceReaction}:null,game:danceFor(p)}))};}
+    function snapshot(){syncTime();return{clock,pets:pets.map(p=>({...p,needs:{...p.needs},profile:profiles[p.id],growth:growth(p.xp),cooldowns:Object.fromEntries(Object.entries(p.cooldowns).map(([k,end])=>[k,Math.max(0,end-clock)])),job:p.job?{...p.job,target:p.job.target?{...p.job.target}:null,origin:{...p.job.origin},dance:p.job.dance?{...p.job.dance}:undefined}:null,reaction:p.reaction?{...p.reaction}:null,danceReaction:p.danceReaction?{...p.danceReaction}:null,game:danceFor(p)}))};}
     function battleAllowed(id){
       const p=pets[id];if(!p)return{ok:false,reason:'missing',low:[]};
       if(p.job||p.battle)return{ok:false,reason:'busy',low:[]};
@@ -110,10 +110,10 @@
     function settleBattle(id,ticket,won,reward){
       syncTime();const p=pets[id];if(!p||p.battle!==ticket)return{ok:false,xp:0};
       p.battle=null;const before=growth(p.xp).level,previous=p.xp;
-      if(won){p.xp=Math.min(rules.maxXp,p.xp+number(reward,0,0,40));p.bond=Math.min(100,p.bond+2);}
+      if(won){p.xp=Math.min(rules.maxXp,p.xp+number(reward,0,0,40));}
       return{ok:true,xp:p.xp-previous,leveled:growth(p.xp).level>before,level:growth(p.xp).level};
     }
-    function serialize(){syncTime();return{version:1,needsRefillRevision,savedAt:lastNeedsAt,pets:pets.map(p=>({needs:{...p.needs},xp:p.xp,bond:p.bond,cooldowns:Object.fromEntries(Object.entries(p.cooldowns).map(([k,end])=>[k,Math.max(0,end-clock)]))}))};}
+    function serialize(){syncTime();return{version:1,needsRefillRevision,savedAt:lastNeedsAt,pets:pets.map(p=>({needs:{...p.needs},xp:p.xp,cooldowns:Object.fromEntries(Object.entries(p.cooldowns).map(([k,end])=>[k,Math.max(0,end-clock)]))}))};}
     return{profiles,actions,act,tap,available,cancel,update,snapshot,serialize,battleAvailable,beginBattle,beginDuel,settleBattle};
   }
   root.ParkCare={create,profiles,actions,rules,danceRules,danceFor,needValue};

@@ -14,11 +14,10 @@
 <meta name="twitter:title" content="小P · 云栖乐园">
 <meta name="twitter:description" content="和小P一起养萌宠、探索秘境、轻松对战，收获每天的小小快乐。">
 
-<link rel="icon" href="assets/portrait.png"><link rel="stylesheet" href="park.css?v=40c84fe19296">
+<link rel="icon" href="assets/portrait.png"><link rel="stylesheet" href="park.css?v=0a4d907d52a9">
 </head>
 <body data-game="xiaop-cloudhaven">
 <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
-<symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 6l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
 <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.2 3 4 3 4-3 4-3M8 9h.01M16 9h.01"/></symbol>
 <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="m13 3 2.1 6.9L22 12l-6.9 2.1L13 21l-2.1-6.9L4 12l6.9-2.1L13 3ZM4 2v4M2 4h4"/></symbol>
 <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/></symbol>
@@ -29,8 +28,8 @@
 <main class="park-main" id="parkStage">
 <div class="park-layout">
 <section class="scene-column" aria-label="圆形宠物乐园">
-<div class="scene-frame"><div class="header-tools" id="screenTools"><select id="sceneSelect" class="text-button" aria-label="切换场景"><option value="forest">森林树屋</option><option value="snow">冰雪营地</option><option value="desert">沙漠遗迹</option><option value="lava">熔岩山谷</option></select><button id="helpBtn" class="text-button" aria-label="打开玩法说明">?</button></div><div id="dialogShade" class="dialog-shade" hidden></div><dialog aria-modal="true" id="petCard" class="pet-card" aria-labelledby="petCardName">
-<header class="pet-card-title"><h2 id="petCardName"></h2><button id="closePetCard" class="card-close" aria-label="关闭宠物卡片" autofocus>×</button></header>
+<div class="scene-frame"><div class="header-tools" id="screenTools" hidden><span id="sceneLabel" class="scene-tag" aria-label="当前地图"></span></div><div id="dialogShade" class="dialog-shade" hidden></div><dialog aria-modal="true" id="petCard" class="pet-card" aria-labelledby="petCardName">
+<header class="pet-card-title"><h2 id="petCardName"></h2><div class="pet-card-tools"><b id="careLevel">Lv.1</b><button id="closePetCard" class="card-close" aria-label="关闭宠物卡片" autofocus>×</button></div></header>
 <div class="pet-card-content">
 <section class="pet-card-expression" aria-label="这位伙伴的四种表情">
 <div class="pet-card-preview"><div id="parkExpression" class="expression-sprite" role="img" aria-label="伙伴表情"></div><span id="expressionName">开心</span></div>
@@ -38,7 +37,6 @@
 </section>
 <aside class="care-panel" aria-label="与选中的伙伴互动">
 <section class="care-stats" aria-label="伙伴状态">
-<div class="care-growth"><span class="care-bond"><svg class="icon"><use href="#icon-heart"/></svg><span id="careRelationship">初识的小伙伴</span></span><b id="careLevel">Lv.1</b></div>
 <div class="care-xp-track"><i id="careXpBar"></i></div><p class="care-xp" id="careXpText">成长 0 / 40</p>
 <div class="care-needs">
 <div class="need-cell"><span class="need-icon"><svg class="icon"><use href="#icon-food"/></svg></span><span class="need-label" id="needFoodLabel">饱食</span><b id="needFoodValue">70</b><div class="need-track" id="needFood" role="progressbar" aria-label="饱食" aria-valuemin="1" aria-valuemax="100"><i id="needFoodBar"></i></div></div>
@@ -57,9 +55,8 @@
 </aside>
 </div>
 </dialog>
-<dialog aria-modal="true" id="mapPicker" aria-labelledby="mapPickerTitle"><div class="help-title"><h2 id="mapPickerTitle">选择场景</h2><button id="closeMapPicker" aria-label="关闭场景选择">×</button></div><div class="map-choices"><button id="mapForest" class="map-choice"><img src="assets/maps/forest.png?v=35" alt=""><span>森林树屋</span></button><button id="mapSnow" class="map-choice"><img src="assets/maps/snow.png?v=35" alt=""><span>冰雪营地</span></button><button id="mapDesert" class="map-choice"><img src="assets/maps/desert.png?v=35" alt=""><span>沙漠遗迹</span></button><button id="mapLava" class="map-choice"><img src="assets/maps/lava.png?v=35" alt=""><span>熔岩山谷</span></button></div></dialog>
-<dialog aria-modal="true" id="duelPicker" aria-labelledby="duelTitle"><div class="help-title"><h2 id="duelTitle">选择对手</h2><button id="closeDuelPicker" aria-label="关闭对手选择">×</button></div><p id="duelRule" class="duel-rule">双方各自每张地图有两只不同的小怪，至少一项属性达到 30 即可进入竞技场，两位伙伴轮流出招。</p><div class="duel-opponents"><button id="duelPet0" class="duel-pet"></button><button id="duelPet1" class="duel-pet"></button><button id="duelPet2" class="duel-pet"></button><button id="duelPet3" class="duel-pet"></button><button id="duelPet4" class="duel-pet"></button><button id="duelPet5" class="duel-pet"></button></div></dialog>
-<dialog aria-modal="true" id="parkHelp"><div class="help-title"><h2>和伙伴一起玩</h2><button id="closeHelp" aria-label="关闭玩法说明">×</button></div><div class="help-content"><p>在营地点击宠物，再点击战斗选择探索地图。地图下方有背包和返回营地两个按钮，背包打开这只宠物的养成与表情面板，照料也在地图中完成。点击铺装地面移动；点击宠物或小怪时，每张地图有两只不同的小怪，至少一项属性达到 30 即可进入竞技场；只有四项全低于 30 才提示暂不能战斗。战后返回原地图继续探索。背包中的伙伴对战也使用竞技场。</p><p>选择喂食、摸头或泡泡澡，伙伴会用动作和表情回应你。选择一起跳舞，伙伴会自动跳一段舞。轻点它或按空格、Enter，可以切换舞步回应。</p><p>对战只有一种光波：点击底部移动的滑轮即可锁定并发射，停在中央绿色区域造成正常伤害，其他区域伤害减半。倒计时为 60 秒，时间到按剩余血量比例判定，平局不奖励经验。</p><p>日常喂食、摸头、跳舞、洗澡恢复属性，不增加经验。只有四项属性都低于 30 才不能出战，打怪胜利后获得经验；双宠对战时经验发给获胜伙伴，退出或失败不获得经验。四种表情都在这位伙伴的卡片中选择。</p><p>伙伴最高 10 级。四项状态自然变化很慢，没有互动时约一天从 100 降到 1，待机也会继续计时。</p><p>滚轮缩放地图，拖动平移，Esc 关闭宠物卡片；回到地图后可结束舞蹈并复位视角。位置与成长会自动保存。</p></div></dialog>
+<dialog aria-modal="true" id="mapPicker" aria-labelledby="mapPickerTitle"><div class="dialog-title"><h2 id="mapPickerTitle">选择场景</h2><button id="closeMapPicker" aria-label="关闭场景选择">×</button></div><div class="map-choices"><button id="mapForest" class="map-choice"><img src="assets/maps/forest.png?v=35" alt=""><span>森林树屋</span></button><button id="mapSnow" class="map-choice"><img src="assets/maps/snow.png?v=35" alt=""><span>冰雪营地</span></button><button id="mapDesert" class="map-choice"><img src="assets/maps/desert.png?v=35" alt=""><span>沙漠遗迹</span></button><button id="mapLava" class="map-choice"><img src="assets/maps/lava.png?v=35" alt=""><span>熔岩山谷</span></button></div></dialog>
+<dialog aria-modal="true" id="duelPicker" aria-labelledby="duelTitle"><div class="dialog-title"><h2 id="duelTitle">选择对手</h2><button id="closeDuelPicker" aria-label="关闭对手选择">×</button></div><p id="duelRule" class="duel-rule">双方各自每张地图有两只不同的小怪，至少一项属性达到 30 即可进入竞技场，两位伙伴轮流出招。</p><div class="duel-opponents"><button id="duelPet0" class="duel-pet"></button><button id="duelPet1" class="duel-pet"></button><button id="duelPet2" class="duel-pet"></button><button id="duelPet3" class="duel-pet"></button><button id="duelPet4" class="duel-pet"></button><button id="duelPet5" class="duel-pet"></button></div></dialog>
 <section id="battlePanel" class="battle-panel" aria-label="圆屏光波对战" hidden>
 <button id="battleWave" class="battle-lock" aria-label="点击滑轮，锁定位置并发射光波"><span class="sr-only">锁定并发射光波</span></button>
 <p id="battleResult" class="sr-only" role="status" aria-live="polite"></p>
@@ -73,5 +70,5 @@
 </div>
 <div class="sr-only"><span id="selectedNumber"></span><span id="selectedDescription"></span><span id="selectedPersonality"></span><span id="interactionCount"></span><span id="expressionSource"></span><span id="saveStatus"></span></div>
 </main>
-<script src="catalog.js?v=90841544ff82"></script><script src="assets/maps/road-navigation.js?v=107e67bc0521"></script><script src="park-map.js?v=6ed469c27658"></script><script src="park-worlds.js?v=e0512f2af24c"></script><script src="assets/locomotion/manifest.js?v=0ebb559e3c31"></script><script src="assets/expressions/manifest.js?v=f897c3a03b33"></script><script src="park-expressions.js?v=e9e71b84402f"></script><script src="park-motion.js?v=7637cda675ba"></script><script src="park-engine.js?v=32776f2b95f6"></script><script src="park-care.js?v=3ca10dd0a2fa"></script><script src="park-combat.js?v=fd2123774b4f"></script><script src="park-adventure.js?v=b7c4c285b89f"></script><script src="assets/monsters/manifest.js?v=bc8197dd788a"></script><script src="assets/rhythm/manifest.js?v=c7278f900401"></script><script src="park-dance.js?v=8a0d239bcc41"></script><script src="assets/care/props.js?v=dc33efc0f8fb"></script><script src="park-care-gestures.js?v=717971d9a608"></script><script src="park-care-art.js?v=c06b8b061ac0"></script><script src="park-scene.js?v=9cbcb4d3776e"></script><script src="park-battle-scene.js?v=0d7ecace80dc"></script><script src="park.js?v=ad322b109f23"></script>
+<script src="catalog.js?v=90841544ff82"></script><script src="assets/maps/road-navigation.js?v=107e67bc0521"></script><script src="park-map.js?v=6ed469c27658"></script><script src="park-worlds.js?v=e0512f2af24c"></script><script src="assets/locomotion/manifest.js?v=0ebb559e3c31"></script><script src="assets/expressions/manifest.js?v=f897c3a03b33"></script><script src="park-expressions.js?v=e9e71b84402f"></script><script src="park-motion.js?v=7637cda675ba"></script><script src="park-engine.js?v=32776f2b95f6"></script><script src="park-care.js?v=6553cdcd37ee"></script><script src="park-combat.js?v=fd2123774b4f"></script><script src="park-adventure.js?v=b7c4c285b89f"></script><script src="assets/monsters/manifest.js?v=bc8197dd788a"></script><script src="assets/rhythm/manifest.js?v=c7278f900401"></script><script src="park-dance.js?v=8a0d239bcc41"></script><script src="assets/care/props.js?v=dc33efc0f8fb"></script><script src="park-care-gestures.js?v=717971d9a608"></script><script src="park-care-art.js?v=c06b8b061ac0"></script><script src="park-scene.js?v=9cbcb4d3776e"></script><script src="park-battle-scene.js?v=0d7ecace80dc"></script><script src="park.js?v=3eaa3baa0d75"></script>
 </body></html>

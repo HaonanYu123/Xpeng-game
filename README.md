@@ -21,3 +21,5 @@ Enable GitHub Pages with GitHub Actions as the source. Pushes to main deploy the
 Run `node assets-test.cjs`. No package installation or build is needed.
 
 This repository contains the current runtime, an asset check and deployment configuration. It excludes local backups, development history and computer-specific records.
+
+UI update: no help icon or intimacy system; scene labels are read-only. Backpack cards use a clipped rounded shell and internal scrolling. Navigation uses stronger colors and in-button labels.
