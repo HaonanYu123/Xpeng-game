@@ -34,7 +34,7 @@ a{color:inherit;text-decoration:none;}
 .care-actions button:active:not(:disabled){transform:translateY(1px);}
 .care-actions b{font-size:clamp(14px,1.15vw,21px);font-weight:500;white-space:nowrap;position:relative;z-index:1;}
 .action-next{width:15px;height:18px;margin-left:auto;color:#c48f4b;flex-shrink:0;}
-.action-art{display:block;flex-shrink:0;width:clamp(66px,6.4vw,112px);aspect-ratio:1;background-image:url("assets/ui/care-atlas-v17.png");background-size:300% 200%;background-repeat:no-repeat;filter:drop-shadow(0 5px 4px #bf91541a);}
+.action-art{display:block;flex-shrink:0;width:clamp(66px,6.4vw,112px);aspect-ratio:1;background-image:url("assets/ui/care-atlas-v17.webp");background-size:300% 200%;background-repeat:no-repeat;filter:drop-shadow(0 5px 4px #bf91541a);}
 .art-feed{background-position:0 0;}
 .art-pet{background-position:50% 0;}
 .art-bath{background-position:0 100%;}
@@ -189,7 +189,7 @@ dialog::backdrop{background:#6f512d38;backdrop-filter:blur(7px);}
 .pet-card-expression .emote-thumbnail{transform:scale(.55);margin:-19px;}
 .pet-card-expression h3{font-size:10px;}
 }
-.art-dance{background-image:url("assets/ui/rhythm-drum-v20.png");background-size:contain;background-position:center;}
+.art-dance{background-image:url("assets/ui/rhythm-drum-v20.webp");background-size:contain;background-position:center;}
 .scene-frame canvas.dance-active{cursor:pointer;}
 .header-tools{display:flex;align-items:center;gap:10px;}
 .battle-panel{width:min(640px,100%);margin:20px auto 0;text-align:center;}

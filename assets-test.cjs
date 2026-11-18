@@ -40,7 +40,7 @@ for(const [species,pet]of pets.entries()){
  assert.equal(pet.id,species);assert.equal(window.ParkMap.spawns[species].name,pet.name);
  for(const atlas of [window.ParkWalkAssets,window.ParkExpressionAssets,window.ParkRhythmAssets])assert.ok(atlas.characters[pet.key],'each pet needs walk/hover, expression and dance assets: '+pet.key);
 }
-localFile(path.join(root,'index.html'),'assets/monsters/enemies-v23.png');
-for(const enemy of window.ParkCombat.enemies.filter(e=>e.imageKey))localFile(path.join(root,'index.html'),'assets/monsters/'+enemy.id+'-v30.png');
+localFile(path.join(root,'index.html'),'assets/monsters/enemies-v23.webp');
+for(const enemy of window.ParkCombat.enemies.filter(e=>e.imageKey))localFile(path.join(root,'index.html'),'assets/monsters/'+enemy.id+'-v30.webp');
 console.log('PASS current game local dependencies: six pet rigs, 24 faces, care/dance art, all maps and eight monsters');
 module.exports={files};

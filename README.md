@@ -23,3 +23,5 @@ Run `node assets-test.cjs`. No package installation or build is needed.
 This repository contains the current runtime, an asset check and deployment configuration. It excludes local backups, development history and computer-specific records.
 
 UI update: no help icon or intimacy system; scene labels are read-only. Backpack cards use a clipped rounded shell and internal scrolling. Navigation uses stronger colors and in-button labels.
+
+Runtime images use lossless WebP, with the PNG favicon and share image retained. The published game is about 31.03 MiB (31.1% smaller); gameplay and the localStorage save format are unchanged.

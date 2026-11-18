@@ -1,6 +1,6 @@
 window.ParkCareProps = {
   "care-hand-pat": {
-    "image": "assets/care/hand-pat-cartoon.png",
+    "image": "assets/care/hand-pat-cartoon.webp",
     "width": 512,
     "height": 512,
     "contentWidth": 480,
@@ -11,7 +11,7 @@ window.ParkCareProps = {
     ]
   },
   "care-hand-offer": {
-    "image": "assets/care/hand-offer-cartoon.png",
+    "image": "assets/care/hand-offer-cartoon.webp",
     "width": 512,
     "height": 512,
     "contentWidth": 480,
@@ -22,7 +22,7 @@ window.ParkCareProps = {
     ]
   },
   "care-dog-biscuit": {
-    "image": "assets/care/dog-biscuit.png",
+    "image": "assets/care/dog-biscuit.webp",
     "width": 512,
     "height": 512,
     "contentWidth": 480,

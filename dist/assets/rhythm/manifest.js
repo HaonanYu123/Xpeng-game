@@ -1,6 +1,6 @@
 window.ParkRhythmAssets = {
   "version": 1,
-  "image": "assets/rhythm/rhythm-atlas-v20-clean.png",
+  "image": "assets/rhythm/rhythm-atlas-v20-clean.webp",
   "frames": 18,
   "columns": 6,
   "rows": 3,

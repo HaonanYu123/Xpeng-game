@@ -5,7 +5,7 @@ window.ParkWalkAssets = {
   "frames": 8,
   "characters": {
     "bird": {
-      "image": "assets/locomotion/bird-walk.png",
+      "image": "assets/locomotion/bird-walk.webp",
       "frames": 8,
       "columns": 4,
       "frameWidth": 320,
@@ -36,7 +36,7 @@ window.ParkWalkAssets = {
       }
     },
     "cloud": {
-      "image": "assets/locomotion/cloud-walk.png",
+      "image": "assets/locomotion/cloud-walk.webp",
       "frames": 8,
       "columns": 4,
       "frameWidth": 320,
@@ -67,7 +67,7 @@ window.ParkWalkAssets = {
       }
     },
     "rabbit": {
-      "image": "assets/locomotion/rabbit-walk.png",
+      "image": "assets/locomotion/rabbit-walk.webp",
       "frames": 8,
       "columns": 4,
       "frameWidth": 320,
@@ -98,7 +98,7 @@ window.ParkWalkAssets = {
       }
     },
     "bear": {
-      "image": "assets/locomotion/bear-walk.png",
+      "image": "assets/locomotion/bear-walk.webp",
       "frames": 8,
       "columns": 4,
       "frameWidth": 320,
@@ -129,7 +129,7 @@ window.ParkWalkAssets = {
       }
     },
     "dog": {
-      "image": "assets/locomotion/dog-quadruped-walk.png",
+      "image": "assets/locomotion/dog-quadruped-walk.webp",
       "frames": 8,
       "columns": 4,
       "frameWidth": 320,
@@ -259,7 +259,7 @@ window.ParkWalkAssets = {
         ]
       },
       "actions": {
-        "image": "assets/locomotion/dog-quadruped-actions.png",
+        "image": "assets/locomotion/dog-quadruped-actions.webp",
         "frames": 4,
         "columns": 2,
         "frameWidth": 512,
@@ -330,7 +330,7 @@ window.ParkWalkAssets = {
       }
     },
     "xiaop": {
-      "image": "assets/pets/xiaop.png",
+      "image": "assets/pets/xiaop.webp",
       "gait": "hover",
       "frames": 1,
       "uniqueFrames": 1,

@@ -8,7 +8,7 @@ window.ParkExpressionAssets = {
   ],
   "characters": {
     "bird": {
-      "image": "assets/expressions/bird-expressions.png",
+      "image": "assets/expressions/bird-expressions.webp",
       "frames": 4,
       "columns": 2,
       "frameWidth": 512,
@@ -69,7 +69,7 @@ window.ParkExpressionAssets = {
       "facing": -1
     },
     "cloud": {
-      "image": "assets/expressions/cloud-expressions.png",
+      "image": "assets/expressions/cloud-expressions.webp",
       "frames": 4,
       "columns": 2,
       "frameWidth": 512,
@@ -130,7 +130,7 @@ window.ParkExpressionAssets = {
       "facing": -1
     },
     "rabbit": {
-      "image": "assets/expressions/rabbit-expressions.png",
+      "image": "assets/expressions/rabbit-expressions.webp",
       "frames": 4,
       "columns": 2,
       "frameWidth": 512,
@@ -191,7 +191,7 @@ window.ParkExpressionAssets = {
       "facing": -1
     },
     "bear": {
-      "image": "assets/expressions/bear-expressions.png",
+      "image": "assets/expressions/bear-expressions.webp",
       "frames": 4,
       "columns": 2,
       "frameWidth": 512,
@@ -252,7 +252,7 @@ window.ParkExpressionAssets = {
       "facing": -1
     },
     "dog": {
-      "image": "assets/expressions/dog-expressions.png",
+      "image": "assets/expressions/dog-expressions.webp",
       "frames": 4,
       "columns": 2,
       "frameWidth": 512,
@@ -313,7 +313,7 @@ window.ParkExpressionAssets = {
       "facing": 1
     },
     "xiaop": {
-      "image": "assets/expressions/xiaop-expressions.png",
+      "image": "assets/expressions/xiaop-expressions.webp",
       "frames": 4,
       "columns": 2,
       "frameWidth": 512,

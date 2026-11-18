@@ -2,8 +2,8 @@
 (function(root){
  const map=root.ParkMap||(typeof module==='object'&&module.exports?require('./park-map.js'):null);
  const original={...map,world:{...map.world},obstacles:map.obstacles.slice(),spawns:map.spawns.map(p=>({...p}))};
- const scenes=[{id:'forest',name:'森林树屋',image:'assets/maps/forest.png'},{id:'snow',name:'冰雪营地',image:'assets/maps/snow.png'},{id:'desert',name:'沙漠遗迹',image:'assets/maps/desert.png'},{id:'lava',name:'熔岩山谷',image:'assets/maps/lava.png'}];
- const arena={id:'arena',name:'竞技场',image:'assets/maps/arena.png'};
+ const scenes=[{id:'forest',name:'森林树屋',image:'assets/maps/forest.webp'},{id:'snow',name:'冰雪营地',image:'assets/maps/snow.webp'},{id:'desert',name:'沙漠遗迹',image:'assets/maps/desert.webp'},{id:'lava',name:'熔岩山谷',image:'assets/maps/lava.webp'}];
+ const arena={id:'arena',name:'竞技场',image:'assets/maps/arena.webp'};
  function segmentDistance(x,y,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy)));return Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy);}
  let roads=[[[640,790],[640,1090],54]];
  const branches={

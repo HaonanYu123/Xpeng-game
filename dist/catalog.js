@@ -6,7 +6,7 @@
     "key": "bird",
     "name": "蓝翎啾啾",
     "color": "#779ee9",
-    "image": "assets/pets/bird.png",
+    "image": "assets/pets/bird.webp",
     "desc": "把风藏进蓝色翅膀，勇敢替你探一探前路。"
   },
   {
@@ -14,7 +14,7 @@
     "key": "cloud",
     "name": "云绵朵朵",
     "color": "#99cbbd",
-    "image": "assets/pets/cloud.png",
+    "image": "assets/pets/cloud.webp",
     "desc": "脸颊藏着一小片晚霞，拥抱就能赶走坏心情。"
   },
   {
@@ -22,7 +22,7 @@
     "key": "rabbit",
     "name": "绒耳跳跳",
     "color": "#b09ad6",
-    "image": "assets/pets/rabbit.png",
+    "image": "assets/pets/rabbit.webp",
     "desc": "长耳朵接住每个新消息，也接住你的小情绪。"
   },
   {
@@ -30,7 +30,7 @@
     "key": "bear",
     "name": "暖围抱抱",
     "color": "#d6ad52",
-    "image": "assets/pets/bear.png",
+    "image": "assets/pets/bear.webp",
     "desc": "黄围巾是阳光织的，想把安全感分你一半。"
   },
   {
@@ -38,14 +38,14 @@
     "key": "dog",
     "name": "毛衣汪汪",
     "color": "#7facc6",
-    "image": "assets/pets/dog.png",
+    "image": "assets/pets/dog.webp",
     "desc": "把陪伴织进蓝毛衣，你一回头，它就会在。"
   },
   {
     "id": 5,
     "key": "xiaop",
     "name": "小P",
-    "image": "assets/pets/xiaop.png",
+    "image": "assets/pets/xiaop.webp",
     "color": "#82d8d7",
     "desc": "白色机身、青色眼睛的悬浮伙伴；双腿自然垂下，在乐园里轻轻漂浮。"
   }
